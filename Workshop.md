@@ -10,6 +10,7 @@ On Windows, open Git Bash application.
 On Mac, open Terminal application.
 
 # 1. Help
+Git has a built in help mechanism, as well as guides for specific topics.
 ```
 $ git help                        # General help
 $ git help --guide                # Common Git guides
@@ -20,30 +21,29 @@ Get help on configuration
 ```
 $ git help config                 # See FILES section
 ```
-Show the current configuration for all projects
+Show the current configuration for all projects, which is done by using the --global option.
+Without the global option, you will be changing options for the current git repo only.
 ```
 $ git config --global --list      # ~/.gitconfig
 ```
-
-Check specific config values
-
+Check specific config values for your user name and email.
 ```
 $ git config user.name
 $ git config user.email
 ```
-Set your user name
+Set your user name that Git will use when you do a commit.
 ```
 $ git config --global "Joe Cool"
 ```
-Set your user email
+Set your user email that Git will use when you do a commit.
 ```
 $ git config --global user.email joe.cool@example.com
 ```
-Set default branch to main
+Set default Git branch to `main`.  The default branch after you install git is `master`, but almost everyone uses main instead now.
 ```
 $ git config --global init.defaultBranch main
 ```
-Open the config in editor, note default editor is vi!
+Open the global config in an editor, note default editor is vi!
 ```
 $ git config --global --edit      # Open config in editor
 ```
