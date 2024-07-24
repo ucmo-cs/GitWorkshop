@@ -53,7 +53,7 @@ $ git config --global core.editor "code --wait"
 ```
 # 3. Git 101
 
-Change to file ssytem location of your choice  
+Change to file system location of your choice  
 ...so we can make directory for today  
 Note, Mac Terminal will open to your home directory which is located in the directory /Users/username  
 Note, Windows Git Bash will open to your home directory C:\Users\username
