@@ -354,4 +354,8 @@ $ git log
 # 9. Next Steps
 
 This workshop has given you a basic intro to Git and it's usage.  The best way
-to learn more Git is to use it on your own projects and homework.
+to learn more Git is to use it on your own projects and homework.  The official
+Git book, which you can get in ebook form here: https://git-scm.com/book/en/v2,
+is a great resource for answering the questions that you may have as you 
+explore Git!!!
+
