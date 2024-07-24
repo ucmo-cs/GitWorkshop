@@ -53,7 +53,7 @@ $ git config --global core.editor "code --wait"
 ```
 # 3. Git 101
 
-Change to location of your choice  
+Change to file ssytem location of your choice  
 ...so we can make directory for today  
 Note, Mac Terminal will open to your home directory which is located in the directory /Users/username  
 Note, Windows Git Bash will open to your home directory C:\Users\username
@@ -68,12 +68,13 @@ $ git init
 ```
 Can also create directory and init with one command "$ git init git101"  
 
-Let's see what we have - We list a directories contents in Unix with 'ls' command  
+Let's see what we have - We can list a directory's contents in Unix with 'ls' command  
 No non-hidden files
 ```
 $ ls
 ```
-However, the local git repository data is in the hidden directory .git
+However, the local git repository data is in the hidden directory .git, so let's
+take a look at what is in it:
 ```
 $ ls .git
 ```
@@ -84,25 +85,25 @@ Of particular note:
 - .git/config                 `git config -e`  
 - .git/HEAD                   ref: refs/heads/master  
 ```
-What does Git think it has?
+What does Git think it has?  We can find out using the status command:
 ```
 $ git status
 ```
-Let's commit something!
+Let's commit something!  We are going to create an empty README file
 ```
 $ touch README.md                 # Create README.md
 $ git status                      # Untracked files!
 ```
-Stage the file we have created
+Stage the README file we have created
 ```
 $ git add README.md               # Track the README.md file
 $ git status                      # Changes!
 ```
-Commit the file
+Commit the README file
 ```
 $ git commit -m "Add empty README"
 ```
-Let's look at our Git history
+Let's look at our Git history now that we have done a committ.
 ```
 $ git log
 ```
@@ -110,7 +111,7 @@ $ git log
 
 We are going to use a UCM Organization Github repo for this workshop.  
 However, since all of you will not have write permissions on this repo,  
-Ee are going to have you Fork the repo into your own Github account.  
+we are going to have you Fork the repo into your own Github account.  
   
 Make sure you are logged in to your Github account.  
   
@@ -126,12 +127,12 @@ https://github.com/{your_github_username}/git-hands-on.git
 
 # 4. Clone a Remote Repository
 
-We will get a local copy of the repo we forked to your account.  
+We will now get a local copy of the repo we forked to your account.  
 ```
 $ cd ..   # Should be in git-hands-on directory
 $ git clone https://github.com/{your_github_username}/git-hands-on.git
 ```
-Let's see what we have
+Let's see what we have by listing the directory:
 ```
 $ cd git-hands-on
 $ ls
@@ -144,12 +145,17 @@ What local branches do we have?
 ```
 $ git branch
 ```
-What is 'origin/main'?
+What is 'origin/main'?  Origin means it comes from the remote repo name origin,
+and main is the name of the branch in that repo.  We can list the remotes 
+known to your local repo with the 'git remote -v' command (The -v means verbose).
+We can list the  remote branches with the 'git branch -r' command (The -r means
+remote).
 ```
 $ git remote -v
 $ git branch -r
 ```
-Git history
+Now, lets look at the Git history of this repo, displayed in two different
+formats.
 ```
 $ git log
 $ git log --oneline --graph
@@ -172,7 +178,7 @@ What if we change our minds before we commit?
 ```
 $ git restore README.md
 ```
-Change the test.txt file to be again:
+Change the test.txt file to again be:
 ```
 This is the first line.
 My second line.
@@ -190,7 +196,7 @@ Look at the history
 $ git log
 $ git log --oneline --graph
 ```
-Let's share our favorite number
+Let's share our changes to test.txt with the remote repository.
 ```
 $ git push
 ```
@@ -205,7 +211,8 @@ Look at the file now, it should have contents before our last change:
 ```
 $ cat test.txt
 ```
-Note we can achieve the above with:
+Note we can achieve the above with the following, which means one commit
+before the head of the current branch:
 ```
 $ git checkout HEAD~1
 ```
@@ -215,20 +222,21 @@ $ git checkout HEAD
 ```
 # 6. Working Locally with Branches
 
-Start work on feature 1
+Start work on feature 1, we are going to create a new branch for it with the
+name feature1, and checkout that branch.
 ```
 $ git branch feature1             # Create branch from here
 $ git switch feature1           # Switch to different branch
 $ git branch
 ```
-Check we are on correct branch, then create and empty file, stage and commit it.
+Check we are on correct branch, then create an empty file, stage and commit it.
 ```
 $ git status
 $ touch feature1.md
 $ git add feture1.md
 $ git commit -m "Add feature 1"
 ```
-Check file
+Check that the file exists in this new branch:
 ```
 $ ls
 ```
@@ -264,21 +272,21 @@ Check on the diffs between two branches
 $ git diff feature1..feature2
 ```
 # 7. Working Remotely with Branches
-First get latest from GitHub, other people may have made changes
+First get latest commits from GitHub, other people may have made changes
 ```
-git fetch --all
+$ git fetch --all
 ```
 Now let's share some code, our feature1.
 ```
 $ git push origin feature1
 ```
-We can also push the current branch (feature2)
+We can also try to push the current branch (feature2)
 ```
-git push origin HEAD
+$ git push origin HEAD
 ```
 But notice we're missing "up-to-date"
 ```
-git status
+$ git status
 ```
 And plain `git push` fails...
 ```
@@ -286,17 +294,18 @@ $ git push
 ```
 Add -u to set the local feature2 branch's upstream
 ```
-git push -u origin HEAD
-git status
+$ git push -u origin HEAD
+$ git status
 ```
 Now plain `git push` works
 ```
 $ git push
 ```
-Also, typing is overrated (pc = push current)
+Also, typing is overrated.  If we wanted to, we could create a git command alias
+for this push current use case (pc = push current)
 ```
-git config --global alias.pc "push -u origin HEAD"
-git pc
+$ git config --global alias.pc "push -u origin HEAD"
+$ git pc
 ```
 Now let's pretend someone else is working  
 On your fork on GitHub:  
@@ -304,12 +313,12 @@ On your fork on GitHub:
 2. Click on `test.txt`, then the pencil to edit
 3. Change something and commit changes directly to `feature1`
 
-Nothing changes until we explicitly fetch:
+Nothing changes locally until we explicitly fetch:
 ```
 $ git branch -r
 $ git fetch --all
 ```
-We should also bring in changes from feature1
+We should also bring in changes from feature1 branch.
 ```
 $ git checkout feature1
 $ git status                 # behind!
@@ -351,4 +360,9 @@ When done, add the file and complete the merge
 $ git add test.txt
 $ git commit -m "Merged feature2 into main"
 $ git log
-```
+````
+
+# 9. Next Steps
+
+This workshop has given you a basic intro to Git and it's usage.  The best way
+to learn more Git is to use it on your own projects and homework.
