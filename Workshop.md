@@ -33,7 +33,7 @@ $ git config user.email
 ```
 Set your user name that Git will use when you do a commit.
 ```
-$ git config --global "Joe Cool"
+$ git config --global user.name "Joe Cool"
 ```
 Set your user email that Git will use when you do a commit.
 ```
@@ -63,6 +63,7 @@ $ cd git-hands-on
 ```
 Let's create a new repository
 ```
+$ mkdir git101
 $ cd git101
 $ git init
 ```
@@ -145,8 +146,7 @@ What local branches do we have?
 ```
 $ git branch
 ```
-What is 'origin/main'?  Origin means it comes from the remote repo name origin,
-and main is the name of the branch in that repo.  We can list the remotes 
+ We can list the remotes 
 known to your local repo with the 'git remote -v' command (The -v means verbose).
 We can list the  remote branches with the 'git branch -r' command (The -r means
 remote).
@@ -154,6 +154,9 @@ remote).
 $ git remote -v
 $ git branch -r
 ```
+What is 'origin/main'?  Origin means it comes from the remote repo name origin,
+and main is the name of the branch in that repo.   
+
 Now, lets look at the Git history of this repo, displayed in two different
 formats.
 ```
@@ -174,9 +177,15 @@ Then lets stage our changes in Git:
 $ git add test.txt
 $ git status
 ```
-What if we change our minds before we commit?
+What if we change our minds before we commit?  We can unstage it....
 ```
-$ git restore README.md
+$ git restore --staged test.txt
+$ git status
+```
+And then if we want, we can remove the changes also....
+```
+$ git restore test.txt
+$ cat test.txt
 ```
 Change the test.txt file to again be:
 ```
@@ -185,6 +194,7 @@ My second line.
 ```
 Stage and commit the changes this time
 ```
+$ git add
 $ git commit -m "Add second line to test.txt"
 ```
 Look at what Git thinks it has now
@@ -211,14 +221,17 @@ Look at the file now, it should have contents before our last change:
 ```
 $ cat test.txt
 ```
-Note we can achieve the above with the following, which means one commit
-before the head of the current branch:
+Note we can achieve the above of backing up one commit with the following, which
+means one commit before the head of the current branch.  Note, now we don't 
+even have a test.txt file.
 ```
 $ git checkout HEAD~1
+$ ls
 ```
-Go back to the latest on the current branch
+Go back to the latest commit on the current branch main.
 ```
-$ git checkout HEAD
+$ git checkout main
+$ cat test.txt
 ```
 # 6. Working Locally with Branches
 
@@ -280,35 +293,9 @@ Now let's share some code, our feature1.
 ```
 $ git push origin feature1
 ```
-We can also try to push the current branch (feature2)
-```
-$ git push origin HEAD
-```
-But notice we're missing "up-to-date"
-```
-$ git status
-```
-And plain `git push` fails...
-```
-$ git push
-```
-Add -u to set the local feature2 branch's upstream
-```
-$ git push -u origin HEAD
-$ git status
-```
-Now plain `git push` works
-```
-$ git push
-```
-Also, typing is overrated.  If we wanted to, we could create a git command alias
-for this push current use case (pc = push current)
-```
-$ git config --global alias.pc "push -u origin HEAD"
-$ git pc
-```
-Now let's pretend someone else is working  
-On your fork on GitHub:  
+If we look on the Github web interface now, we should see the two new branches.  
+
+Now let's pretend someone else is working on your fork on GitHub:  
 1. Use **Branch** dropdown to switch to feature1
 2. Click on `test.txt`, then the pencil to edit
 3. Change something and commit changes directly to `feature1`
@@ -317,12 +304,14 @@ Nothing changes locally until we explicitly fetch:
 ```
 $ git branch -r
 $ git fetch --all
+$ cat test.txt
 ```
 We should also bring in changes from feature1 branch.
 ```
-$ git checkout feature1
+$ git switch feature1
 $ git status                 # behind!
-$ git pull                   # get latest & merge (no conflicts only 1 side changed)
+$ git pull origin feature1   # get latest & merge (no conflicts only 1 side changed)
+$ cat test.txt
 ```
 # 8. Merging
 Assume we are done with implementing feature2  
@@ -338,13 +327,13 @@ This is the first line in main.
 My second line.
 Good things come to those who main.
 ```
-Lets remind ourselves what the two versions look like:
+And commit those changes.  Note, to do the add and commit all in one step,
+we can use the -a flag to git commit to tell it to add all changed files, then
+do the commit:
 ```
-$ cat test.txt
-$ git switch feature2
-$ cat test.txt
+$ git commit -a -m "Local changes to main"
 ```
-Now let's try to merge the branch locally
+Now let's try to merge the branch locally.
 ```
 $ git switch main      # We always switch to the branch we want to merge INTO
 $ git merge --no-ff feature2   # And we specify the branch we want to merge FROM
