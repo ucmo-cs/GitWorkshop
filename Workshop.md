@@ -6,8 +6,13 @@
 You should have Git on your machine installed via the instructions we sent out.
 You also need to have an account on Github.com.
 
-On Windows, open Git Bash application.
+On Windows, open either the Windows Terminal application (if you specified
+installing the Git Bash modifications to Terminal when you installed Git) and
+open a Git Bash tab, or you can open the standalone Git Bash application.  
+
 On Mac, open Terminal application.
+
+On Linux, open a Terminal window.
 
 # 1. Help
 Git has a built in help mechanism, as well as guides for specific topics.
