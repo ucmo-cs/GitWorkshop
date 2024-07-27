@@ -22,12 +22,14 @@ $ git help --guide                # Common Git guides
 ```
 
 # 2. Configuration
-Get help on configuration
+Get help on configuration.  It will open in a browser window.
 ```
 $ git help config                 # See FILES section
 ```
-Show the current configuration for all projects, which is done by using the --global option.
-Without the global option, you will be changing options for the current git repo only.
+Show the current configuration for all projects, which is done by using 
+the --global option.
+Without the global option, you will be changing options for the current
+git repo only.
 ```
 $ git config --global --list      # ~/.gitconfig
 ```
@@ -44,7 +46,8 @@ Set your user email that Git will use when you do a commit.
 ```
 $ git config --global user.email joe.cool@example.com
 ```
-Set default Git branch to `main`.  The default branch after you install git is `master`, but almost everyone uses main instead now.
+Set default Git branch to `main`.  The default branch after you install
+git is `master`, but almost everyone uses main instead now.
 ```
 $ git config --global init.defaultBranch main
 ```
@@ -60,8 +63,9 @@ $ git config --global core.editor "code --wait"
 
 Change to file system location of your choice  
 ...so we can make directory for today  
-Note, Mac Terminal will open to your home directory which is located in the directory /Users/username  
-Note, Windows Git Bash will open to your home directory C:\Users\username
+Note, Mac Terminal will open to your home directory which is located in the
+directory /Users/username.
+Note, Windows Git Bash will open to your home directory C:\Users\username.
 ```
 $ mkdir git-hands-on
 $ cd git-hands-on
@@ -74,8 +78,9 @@ $ git init
 ```
 Can also create directory and init with one command "$ git init git101"  
 
-Let's see what we have - We can list a directory's contents in Unix with 'ls' command  
-No non-hidden files
+Let's see what we have - We can list a directory's contents in Unix 
+with 'ls' command.  This is going to show an empty directory as there are
+no non-hidden files
 ```
 $ ls
 ```
@@ -151,8 +156,9 @@ What local branches do we have?
 ```
 $ git branch
 ```
- We can list the remotes 
-known to your local repo with the 'git remote -v' command (The -v means verbose).
+We can list the remote repos 
+known to your local repo with the 'git remote -v' command
+(The -v means verbose). 
 We can list the  remote branches with the 'git branch -r' command (The -r means
 remote).
 ```
