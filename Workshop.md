@@ -55,6 +55,13 @@ Open the global config in an editor, note default editor is vi!
 ```
 $ git config --global --edit      # Open config in editor
 ```
+Set editor to nano: (What we will use for this workshop)
+```
+$ git config --global core.editor nano
+```
+
+Demonstrate nano.
+
 Set editor to Visual Studio Code: (assumes command line for VSCode enabled)
 ```
 $ git config --global core.editor "code --wait"
@@ -183,6 +190,10 @@ This is the first line.
 My second line.
 ```
 
+Check the status of changes in Git:
+```
+$ git status
+```
 Then lets stage our changes in Git:
 ```
 $ git add test.txt
@@ -220,6 +231,10 @@ $ git log --oneline --graph
 Let's share our changes to test.txt with the remote repository.
 ```
 $ git push
+```
+Check the status of changes in Git:
+```
+$ git status
 ```
 Check on web interface that changes are there.  
   
@@ -311,13 +326,7 @@ Now let's pretend someone else is working on your fork on GitHub:
 2. Click on `test.txt`, then the pencil to edit
 3. Change something and commit changes directly to `feature1`
 
-Nothing changes locally until we explicitly fetch:
-```
-$ git branch -r
-$ git fetch --all
-$ cat test.txt
-```
-We should also bring in changes from feature1 branch.
+Bring in remote changes from feature1 branch.
 ```
 $ git switch feature1
 $ git status                 # behind!
